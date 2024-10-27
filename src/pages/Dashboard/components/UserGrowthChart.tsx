@@ -5,21 +5,30 @@ import {
   ReferenceArea,
   ResponsiveContainer,
   Tooltip,
+  TooltipProps,
   XAxis,
   YAxis,
 } from "recharts";
 import Card from "../../../components/Card";
 import { format } from "date-fns";
 import { numberAbbr } from "../../../utils/numbers";
-import { useMemo, useState } from "react";
-import { UserGrowthChartTooltip } from "./UserGrowthChartTooltip";
+import { useCallback, useMemo, useState } from "react";
 import { Button } from "../../../components/Button";
+import { SectionHeader } from "../../../components/SectionHeader";
+import {
+  NameType,
+  ValueType,
+} from "recharts/types/component/DefaultTooltipContent";
+import ChartLegend from "../../../components/ChartLegend";
 
 type ChartDataItem = {
   date: string;
   total_user: number;
   active_user: number;
 };
+
+// For zoon in and out functionality - The chart is listening to mouse events to identify the left and right areas of the chart selection
+// with those areas identified, the chart data is being sliced and the chart is being redrawn
 
 export function UsersGrowthChart({ data }: { data: Array<ChartDataItem> }) {
   const [chartState, setChartState] = useState<{
@@ -38,7 +47,7 @@ export function UsersGrowthChart({ data }: { data: Array<ChartDataItem> }) {
     isMouseDown: false,
   });
 
-  function zoomIn() {
+  const zoomIn = useCallback(() => {
     let { refAreaLeftIndex, refAreaRightIndex } = chartState;
 
     const { refAreaLeft, refAreaRight } = chartState;
@@ -72,9 +81,9 @@ export function UsersGrowthChart({ data }: { data: Array<ChartDataItem> }) {
         isMouseDown: false,
       });
     }
-  }
+  }, [chartState, data]);
 
-  function zoomOut() {
+  const zoomOut = useCallback(() => {
     setChartState({
       ...chartState,
       data: data,
@@ -84,7 +93,7 @@ export function UsersGrowthChart({ data }: { data: Array<ChartDataItem> }) {
       refAreaRight: "",
       isMouseDown: false,
     });
-  }
+  }, [chartState, data]);
 
   const isZoomedIn = useMemo(() => {
     return data.length !== chartState.data.length;
@@ -92,10 +101,12 @@ export function UsersGrowthChart({ data }: { data: Array<ChartDataItem> }) {
 
   return (
     <Card className="h-[500px] w-full text-sm select-none">
-      <div className="flex justify-between items-center">
-        <div className="mb-2 text-xl font-semibold ml-3">User Growth</div>
-        <div>{isZoomedIn && <Button onClick={zoomOut}>Reset</Button>}</div>
-      </div>
+      <SectionHeader>
+        <div className="flex justify-between items-center">
+          <div>User Growth</div>
+          <div>{isZoomedIn && <Button onClick={zoomOut}>Reset</Button>}</div>
+        </div>
+      </SectionHeader>
       <ResponsiveContainer width="100%" height="92%" className="">
         <LineChart
           width={500}
@@ -135,13 +146,15 @@ export function UsersGrowthChart({ data }: { data: Array<ChartDataItem> }) {
           <Line
             type="monotone"
             dataKey="active_user"
-            stroke="#8884d8"
+            stroke="#4E8BC4"
+            strokeWidth={2}
             dot={false}
           />
           <Line
             type="monotone"
             dataKey="total_user"
-            stroke="#82ca9d"
+            stroke="#FF99BE"
+            strokeWidth={2}
             dot={false}
           />
           <ReferenceArea
@@ -152,5 +165,32 @@ export function UsersGrowthChart({ data }: { data: Array<ChartDataItem> }) {
         </LineChart>
       </ResponsiveContainer>
     </Card>
+  );
+}
+
+function UserGrowthChartTooltip({
+  payload,
+  label,
+}: TooltipProps<ValueType, NameType>) {
+  if (!label || !payload || payload?.length !== 2) return null;
+
+  return (
+    <div className="bg-white p-3 rounded-md shadow-md border border-gray-200">
+      <div className="font-semibold mb-3">
+        {format(new Date(label), "MMM dd, yyyy")}
+      </div>
+      <div className="flex flex-col gap-2">
+        <ChartLegend
+          color={payload[1].color}
+          content={payload[1].payload.total_user}
+          title="Total Users"
+        />
+        <ChartLegend
+          color={payload[0].color}
+          content={payload[0].payload.active_user}
+          title="Active Users"
+        />
+      </div>
+    </div>
   );
 }

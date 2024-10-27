@@ -4,4 +4,4 @@ export const REVENUE_TYPES_LABEL_MAP: Record<string, string> = {
   other: "Other",
   sponsored: "Sponsored",
   licensing: "Licensing",
-};
+} as const;

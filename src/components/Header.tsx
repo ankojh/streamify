@@ -1,5 +1,7 @@
 import userAvatar from "../assets/DP.jpg";
 
+//Header has hardcoded values for now
+
 export default function Header() {
   return (
     <div className="min-h-16 px-6 bg-white shadow-sm flex justify-between items-center border-b border-gray-200">

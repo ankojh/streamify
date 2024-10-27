@@ -2,9 +2,13 @@
 //Ideally this data should come from an endpoint
 export const MOCK_DASHBOARD_DATA = {
   total_users: 6_340_000,
+  total_user_diff: 3,
   active_users: 3_845_000,
+  active_user_diff: 2,
   total_streams: 1_412_340_000,
+  total_streams_diff: 5,
   revenue: 890_000,
+  revenue_diff: -4,
   top_artist: "Anuv Jain",
   weekly_user_growth_trend: [
     { date: "2023-11-01", total_user: 10000, active_user: 7000 },
@@ -71,37 +75,52 @@ export const MOCK_DASHBOARD_DATA = {
     {
       song_title: "Jo Tum Mere Ho",
       artist: "Anuv Jain",
-      stream_count: 100,
+      stream_count: 12_000_000,
       artist_id: 1,
       song_id: 1,
+      song_art:
+        "https://c.saavncdn.com/401/Jo-Tum-Mere-Ho-Hindi-2024-20240731053953-500x500.jpg",
+      song_rank: 1,
     },
     {
-      song_title: "",
-      artist: "",
-      stream_count: 100,
+      song_title: "Apocalypse",
+      artist: "Cigarettes After Sex",
+      stream_count: 7_430_000,
       artist_id: 2,
       song_id: 2,
+      song_art:
+        "https://upload.wikimedia.org/wikipedia/en/a/a7/Cigarettes_After_Sex_-_Apocalypse.png?20230609065739",
+      song_rank: 2,
     },
     {
-      song_title: "",
-      artist: "",
-      stream_count: 100,
+      song_title: "Big Dawgs",
+      artist: "HanumanKind",
+      stream_count: 6_872_000,
       artist_id: 3,
       song_id: 3,
+      song_art:
+        "https://upload.wikimedia.org/wikipedia/en/8/8e/BigDawgs-Hanumankind.jpeg",
+      song_rank: 3,
     },
     {
-      song_title: "",
-      artist: "",
-      stream_count: 100,
+      song_title: "Tere Bina",
+      artist: "A.R. Rahman",
+      stream_count: 1_900_000,
       artist_id: 4,
       song_id: 4,
+      song_art:
+        "https://c.saavncdn.com/020/Guru-Hindi-2006-20190516131307-500x500.jpg",
+      song_rank: 4,
     },
     {
-      song_title: "",
-      artist: "",
-      stream_count: 100,
+      song_title: "Comfortably Numb",
+      artist: "Pink Floyd",
+      stream_count: 978_000,
       artist_id: 5,
       song_id: 5,
+      song_art:
+        "https://upload.wikimedia.org/wikipedia/en/4/49/Pink-Floyd-Comfortably-Numb-single.jpg",
+      song_rank: 5,
     },
   ],
   recent_streams: [
@@ -111,7 +130,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2023-04-15",
       stream_count: 1500000,
       revenue_type: "subscription",
-      userId: 1,
+      userId: "A1B2",
     },
     {
       artist: "Arijit Singh",
@@ -119,7 +138,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2023-05-10",
       stream_count: 2400000,
       revenue_type: "ads",
-      userId: 2,
+      userId: "C3D4",
     },
     {
       artist: "Ed Sheeran",
@@ -127,7 +146,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2023-06-05",
       stream_count: 3200000,
       revenue_type: "licensing",
-      userId: 3,
+      userId: "E5F6",
     },
     {
       artist: "Shreya Ghoshal",
@@ -135,7 +154,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2023-07-11",
       stream_count: 1800000,
       revenue_type: "subscription",
-      userId: 4,
+      userId: "G7H8",
     },
     {
       artist: "Drake",
@@ -143,7 +162,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2023-07-15",
       stream_count: 2500000,
       revenue_type: "ads",
-      userId: 5,
+      userId: "I9J0",
     },
     {
       artist: "Neha Kakkar",
@@ -151,7 +170,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2023-08-18",
       stream_count: 2100000,
       revenue_type: "sponsored",
-      userId: 6,
+      userId: "K1L2",
     },
     {
       artist: "Adele",
@@ -159,7 +178,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2023-09-12",
       stream_count: 2700000,
       revenue_type: "subscription",
-      userId: 7,
+      userId: "M3N4",
     },
     {
       artist: "Badshah",
@@ -167,7 +186,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2023-09-25",
       stream_count: 1600000,
       revenue_type: "licensing",
-      userId: 9,
+      userId: "O5P6",
     },
     {
       artist: "Billie Eilish",
@@ -175,7 +194,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2023-10-02",
       stream_count: 1900000,
       revenue_type: "other",
-      userId: 10,
+      userId: "Q7R8",
     },
     {
       artist: "Sonu Nigam",
@@ -183,7 +202,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2023-10-11",
       stream_count: 2000000,
       revenue_type: "subscription",
-      userId: 1,
+      userId: "S9T0",
     },
     {
       artist: "Post Malone",
@@ -191,7 +210,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2023-11-05",
       stream_count: 2600000,
       revenue_type: "sponsored",
-      userId: 1,
+      userId: "U1V2",
     },
     {
       artist: "Atif Aslam",
@@ -199,7 +218,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2023-11-16",
       stream_count: 1500000,
       revenue_type: "ads",
-      userId: 1,
+      userId: "W3X4",
     },
     {
       artist: "Dua Lipa",
@@ -207,7 +226,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2023-12-02",
       stream_count: 2200000,
       revenue_type: "subscription",
-      userId: 1,
+      userId: "Y5Z6",
     },
     {
       artist: "Arijit Singh",
@@ -215,7 +234,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-01-15",
       stream_count: 2400000,
       revenue_type: "licensing",
-      userId: 1,
+      userId: "A7B8",
     },
     {
       artist: "Shawn Mendes",
@@ -223,7 +242,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-02-07",
       stream_count: 2800000,
       revenue_type: "ads",
-      userId: 1,
+      userId: "C9D0",
     },
     {
       artist: "Shreya Ghoshal",
@@ -231,7 +250,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-02-22",
       stream_count: 1800000,
       revenue_type: "subscription",
-      userId: 1,
+      userId: "E1F2",
     },
     {
       artist: "Khalid",
@@ -239,7 +258,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-03-05",
       stream_count: 2500000,
       revenue_type: "sponsored",
-      userId: 1,
+      userId: "G3H4",
     },
     {
       artist: "Honey Singh",
@@ -247,7 +266,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-03-18",
       stream_count: 1700000,
       revenue_type: "licensing",
-      userId: 1,
+      userId: "I5J6",
     },
     {
       artist: "The Weeknd",
@@ -255,7 +274,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-04-01",
       stream_count: 3400000,
       revenue_type: "ads",
-      userId: 1,
+      userId: "K7L8",
     },
     {
       artist: "Neeti Mohan",
@@ -263,7 +282,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-04-15",
       stream_count: 1300000,
       revenue_type: "other",
-      userId: 1,
+      userId: "M9N0",
     },
     {
       artist: "Bruno Mars",
@@ -271,7 +290,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-05-04",
       stream_count: 3000000,
       revenue_type: "subscription",
-      userId: 1,
+      userId: "O1P2",
     },
     {
       artist: "Armaan Malik",
@@ -279,7 +298,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-05-12",
       stream_count: 2000000,
       revenue_type: "sponsored",
-      userId: 1,
+      userId: "Q3R4",
     },
     {
       artist: "Justin Bieber",
@@ -287,7 +306,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-06-10",
       stream_count: 2100000,
       revenue_type: "ads",
-      userId: 1,
+      userId: "S5T6",
     },
     {
       artist: "KK",
@@ -295,7 +314,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-06-25",
       stream_count: 1600000,
       revenue_type: "licensing",
-      userId: 1,
+      userId: "U7V8",
     },
     {
       artist: "Beyoncé",
@@ -303,7 +322,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-07-08",
       stream_count: 2700000,
       revenue_type: "other",
-      userId: 1,
+      userId: "W9X0",
     },
     {
       artist: "Alka Yagnik",
@@ -311,7 +330,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-07-20",
       stream_count: 1200000,
       revenue_type: "subscription",
-      userId: 1,
+      userId: "Y1Z2",
     },
     {
       artist: "Cardi B",
@@ -319,7 +338,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-08-01",
       stream_count: 3200000,
       revenue_type: "ads",
-      userId: 1,
+      userId: "A3B4",
     },
     {
       artist: "Lata Mangeshkar",
@@ -327,7 +346,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-08-10",
       stream_count: 1400000,
       revenue_type: "licensing",
-      userId: 1,
+      userId: "C5D6",
     },
     {
       artist: "Eminem",
@@ -335,7 +354,7 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-08-22",
       stream_count: 3000000,
       revenue_type: "sponsored",
-      userId: 1,
+      userId: "E7F8",
     },
     {
       artist: "Shankar Mahadevan",
@@ -343,63 +362,15 @@ export const MOCK_DASHBOARD_DATA = {
       date: "2024-09-05",
       stream_count: 1900000,
       revenue_type: "subscription",
-      userId: 1,
+      userId: "G9H0",
     },
     {
       artist: "Lady Gaga",
       song_title: "Bad Romance",
       date: "2024-09-18",
       stream_count: 2700000,
-      revenue_type: "ads",
-      userId: 1,
-    },
-    {
-      artist: "Udit Narayan",
-      song_title: "Papa Kehte Hain",
-      date: "2024-10-02",
-      stream_count: 1000000,
-      revenue_type: "sponsored",
-      userId: 1,
-    },
-    {
-      artist: "Maroon 5",
-      song_title: "Sugar",
-      date: "2024-10-15",
-      stream_count: 3100000,
       revenue_type: "subscription",
-      userId: 1,
-    },
-    {
-      artist: "Sonu Nigam",
-      song_title: "Abhi Mujh Mein Kahin",
-      date: "2024-10-25",
-      stream_count: 1700000,
-      revenue_type: "other",
-      userId: 1,
-    },
-    {
-      artist: "Selena Gomez",
-      song_title: "Rare",
-      date: "2024-11-02",
-      stream_count: 1900000,
-      revenue_type: "licensing",
-      userId: 1,
-    },
-    {
-      artist: "Pritam",
-      song_title: "Bheegi Si Bhaagi Si",
-      date: "2024-11-12",
-      stream_count: 1400000,
-      revenue_type: "ads",
-      userId: 1,
-    },
-    {
-      artist: "Imagine Dragons",
-      song_title: "Believer",
-      date: "2024-11-12",
-      stream_count: 1400000,
-      revenue_type: "ads",
-      userId: 1,
+      userId: "7GLP",
     },
   ],
 };

@@ -3,7 +3,9 @@ import { Table } from "../../../components/Table";
 import Card from "../../../components/Card";
 import { numberAbbr } from "../../../utils/numbers";
 import { format } from "date-fns";
-import { REVENUE_TYPES_LABEL_MAP } from "../../../constants/revenueType";
+import { SectionHeader } from "../../../components/SectionHeader";
+import { useRevenueFilterContext } from "../hooks/useRevenueFilterContext";
+import { useMemo } from "react";
 
 type RecentStreams = {
   artist: string;
@@ -11,9 +13,14 @@ type RecentStreams = {
   stream_count: number;
   date: string;
   revenue_type: string;
+  userId: string;
 };
 
 const columns: ColumnDef<RecentStreams>[] = [
+  {
+    accessorKey: "userId",
+    header: "User Id",
+  },
   {
     accessorKey: "artist",
     header: "Artist",
@@ -23,7 +30,7 @@ const columns: ColumnDef<RecentStreams>[] = [
     header: "Song",
   },
   {
-    accessorKey: "streamCount",
+    accessorKey: "stream_count",
     header: "Stream Count",
     cell: ({ row }) => {
       return numberAbbr(row.original.stream_count);
@@ -36,21 +43,28 @@ const columns: ColumnDef<RecentStreams>[] = [
       return format(row.original.date, "MMM dd, yyyy");
     },
   },
-  {
-    accessorKey: "revenueType",
-    header: "Revenue Type",
-    cell: ({ row }) => {
-      const c = row.original.revenue_type;
-      console.log(c);
-      return REVENUE_TYPES_LABEL_MAP[row.original.revenue_type];
-    },
-  },
 ];
 
 export function RecentStreamsTable({ data }: { data: Array<RecentStreams> }) {
+  const { filterKey } = useRevenueFilterContext();
+
+  //memoization for filtering data based on the pie chart segment selection
+  const filteredData = useMemo(() => {
+    if (filterKey === "") {
+      return data;
+    }
+
+    return data.filter((item) => item.revenue_type === filterKey);
+  }, [filterKey, data]);
+
   return (
     <Card>
-      <Table data={data} columns={columns} />
+      <SectionHeader>Recent Streams</SectionHeader>
+      <Table
+        data={filteredData}
+        columns={columns}
+        searchPlaceholder="Search by song title or artist"
+      />
     </Card>
   );
 }
