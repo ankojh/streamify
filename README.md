@@ -2,7 +2,7 @@
 
 A mock dashboard for a music streaming app
 
-Here is a 1-minute video walkthrough of the UI - [Loom](link to Loom video)
+Here is a 5-minute video walkthrough of the UI - [Loom](https://www.loom.com/share/883eb381614946b6852263f14ce2ddf5?sid=5e02942c-16cc-471f-b69b-226730c17cd0)
 
 You can also access it live on Netlify: [ankit-streamify.netlify.app](https://ankit-streamify.netlify.app)
 
