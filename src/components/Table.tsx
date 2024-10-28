@@ -1,49 +1,70 @@
 import {
   ColumnDef,
+  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
-  SortingState,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { ReactNode, useMemo, useState } from "react";
+import { Dropdown } from "./Dropdown";
 
 export function Table<T>({
   data,
   columns,
-  searchPlaceholder,
+  activeFilters,
+  setActiveFilters,
+  filterViews,
 }: {
   data: T[];
   columns: ColumnDef<T>[];
-  searchPlaceholder?: string;
+  activeFilters: string[];
+  setActiveFilters: (value: string[]) => void;
+  filterViews: ReactNode[];
 }) {
-  const [globalFilter, setGlobalFilter] = useState<string>("");
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    globalFilterFn: "includesString",
+    filterFns: {},
     state: {
-      globalFilter,
-      sorting,
+      columnFilters,
     },
-    onGlobalFilterChange: setGlobalFilter,
-    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(), //client side filtering
+    getSortedRowModel: getSortedRowModel(),
   });
+
+  const filterHeaderOptions = useMemo(() => {
+    return table
+      .getHeaderGroups()
+      .map((headerGroup) => headerGroup.headers.map((header) => header.id))[0]
+      .map((v) => {
+        return { label: v, value: v };
+      });
+  }, [table]);
 
   return (
     <>
-      <input
-        value={globalFilter}
-        onChange={(e) => table.setGlobalFilter(e.target.value)}
-        className="w-full border border-gray-200 rounded-lg p-2 text-sm mb-2"
-        placeholder={searchPlaceholder}
-      />
+      <div className="flex gap-4">
+        <Dropdown
+          title="Filter"
+          options={filterHeaderOptions}
+          selectedOption={activeFilters}
+          onSelectionChange={setActiveFilters}
+        />
+
+        <div className="flex gap-4">
+          {filterViews.map((filterView, i) => (
+            <div key={i} className="h-5 border-2 border-gray-200">
+              {filterView}
+            </div>
+          ))}
+        </div>
+      </div>
       <table className="w-full text-sm">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -52,16 +73,16 @@ export function Table<T>({
                 <th
                   key={header.id}
                   className="p-1 font-semibold"
-                  onClick={header.column.getToggleSortingHandler()}
+                  // onClick={header.column.getToggleSortingHandler()}
                 >
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext()
                   )}
-                  {{
+                  {/* {{
                     asc: <i className="ri-arrow-up-s-line"></i>,
                     desc: <i className="ri-arrow-down-s-line"></i>,
-                  }[header.column.getIsSorted() as string] ?? null}
+                  }[header.column.getIsSorted() as string] ?? null} */}
                 </th>
               ))}
             </tr>
